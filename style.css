@@ -1,0 +1,111 @@
+@import url("https://unpkg.com/@fontsource/oswald@4.5.10");
+@import url("https://unpkg.com/@fontsource/open-sans@4.5.11");
+
+* {
+  box-sizing: border-box;
+}
+
+.frameless-theme {
+  --default-font-family: "Open Sans", "Arial", sans-serif;
+  --logo-font-family: "Oswald", sans-serif;
+  --logo-font-size: 60px;
+  --logo-font-weight: 400;
+  --logo-animation-duration: 0.8s;
+  --logo-animation-repeat: infinite;
+  --logo-color: var(--default-color);
+  --logo-animation-translate-y: 0.06em;
+  --logo-text-transform: uppercase;
+  --logo-char-margin-inline-end: 0.4ch;
+  --logo-char-odd-translate-y: var(--logo-animation-translate-y);
+  --logo-char-even-translate-y: calc(var(--logo-animation-translate-y) * -1);
+  --default-color: black;
+  --default-background-color: white;
+  --link-color: blue;
+}
+
+body {
+  font-family: var(--default-font-family);
+  color: var(--default-color);
+  background-color: var(--default-background-color);
+  font-size: 1rem;
+  max-width: 75ch;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+
+@keyframes logo-animation {
+  0%,
+  50%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(calc(var(--logo-animation-translate-y) * -1));
+  }
+  75% {
+    transform: translateY(var(--logo-animation-translate-y));
+  }
+}
+
+.logo {
+  position: relative;
+  font-size: var(--logo-font-size);
+  font-weight: var(--logo-font-weight);
+  font-family: var(--logo-font-family);
+  position: relative;
+  color: var(--logo-color);
+  text-transform: var(--logo-text-transform);
+}
+
+.logo__char {
+  display: inline-block;
+  animation: logo-animation var(--logo-animation-duration)
+    var(--logo-animation-repeat);
+  margin-inline-end: var(--logo-char-margin-inline-end);
+}
+
+.logo__char:nth-child(odd) {
+  animation-delay: calc(var(--logo-animation-duration) / 2);
+  transform: translateY(var(--logo-char-odd-translate-y));
+}
+
+.logo__char:nth-child(even) {
+  animation-delay: var(--logo-animation-duration);
+  transform: translateY(var(--logo-char-even-translate-y));
+}
+
+@media (prefers-reduced-motion) {
+  .logo__char {
+    animation: none;
+  }
+}
+
+@media (min-width: 800px) {
+  .card-group {
+    display: flex;
+    gap: 2em;
+    flex-direction: row;
+  }
+
+  .card {
+    border: 1px solid var(--default-color);
+    padding: 5px 20px;
+    width: fit-contentP;
+  }
+}
+
+a {
+  color: var(--link-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  .frameless-theme {
+    --default-color: silver;
+    --default-background-color: black;
+    --link-color: cornflowerblue;
+  }
+}
+
+li + li {
+  margin-block-start: 0.5em;
+}
